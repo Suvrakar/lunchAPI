@@ -15,15 +15,29 @@ app.get("/", (req, res) => {
     res.send("Yes");
 });
 
-app.get("/lunch", (req, res) => {
-    fs.readFile("./db.json", "utf-8", (err, data) => {
-        console.log(data);
-        const employees = JSON.parse(data);
-        res.send(employees.employees);
-    })
-    // let lunchData = await Lunch.find()
-    //     .sort({ name: 1 });
-    // res.send(lunchData);
+app.get("/lunch", async (req, res) => {
+
+    let lunchData = await Lunch.find()
+        .sort({ name: 1 });
+    res.send(lunchData);
+});
+
+app.put("/lunch/:id", async (req, res) => {
+    try {
+        let check= await Lunch.updateOne({
+            // _id:mongoose.Types.ObjectId(req.params.id)
+            employeeId:req.params.id
+          },{
+            $set:req.body
+        });
+        if(check.modifiedCount!==0){
+            res.send("updated");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+   
+
 });
 
 app.post("/lunch", async (req, res) => {
