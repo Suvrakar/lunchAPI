@@ -1,21 +1,21 @@
 const express = require("express")
-
+const fs = require("fs");
 
 const {Lunch} = require("./Models/lunchSchema")
 
-const {connect}=require('./Common/dbConection');
-connect();
-var cors = require('cors')
-const app = express()
-app.use(cors());
-app.use(express.json());
+const mongoose = require("mongoose")
 
+mongoose.connect("mongodb://localhost:27017/HivecoreLunch");
+
+const app = express()
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Yes");
 });
 
-app.get("/employee", (req, res) => {
+app.get("/lunch", (req, res) => {
     fs.readFile("./db.json", "utf-8", (err, data) => {
         console.log(data);
         const employees = JSON.parse(data);
