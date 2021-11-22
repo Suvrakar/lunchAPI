@@ -1,5 +1,6 @@
 const express = require("express")
 const {connect} = require("./Common/dbConection")
+const cors = require("cors");
 connect();
 const router = require("./Router/Router")
 const swaggerJSDoc = require('swagger-jsdoc');  
@@ -9,6 +10,7 @@ const port = process.env.PORT || 3000;
 const app = express()
 
 app.use(express.json());
+app.use(cors());
 app.use("/lunch", router );
 
 /** 
