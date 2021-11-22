@@ -2,39 +2,8 @@ const express = require("express")
 const { Lunch } = require("../Models/lunchSchema")
 
 const router = express.Router();
+const mongoose = require("mongoose")
 
-/** 
- * @swagger 
- * /lunch: 
- *   get: 
- *     description: Get all Employee Lunch data
- *     responses:  
- *       200: 
- *         description: Success  
- *   post: 
- *     summary: Create an new Employee lunch
- *     requestBody: 
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               employeeId:
- *                 type: number
- *                 required: true
- *               name:
- *                 type: string
- *                 required: true
- *               lunch:
- *                 type: boolean
- *                 required: true       
- *               date:
- *                 type: string
- *     responses:  
- *       201: 
- *         description: Created  
- */  
 
 router
     .route("/")
@@ -61,7 +30,7 @@ router
     });
 
 router
-    .put("/lunch/:id", async (req, res) => {
+    .put("/:id", async (req, res) => {
         try {
             let check = await Lunch.updateOne({
                 _id: mongoose.Types.ObjectId(req.params.id)
