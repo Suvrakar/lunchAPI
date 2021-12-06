@@ -10,5 +10,6 @@ It is mainly a Backend of an Lunch app. The app shows who will take the lunch an
 2. There are in total 4 requests in here. You can see the swagger live link for more details.
 3. To tst the APIs use swagger link.
 4. MongoDB is used as Database.
+5. Default port is localhost:3000
 
 
